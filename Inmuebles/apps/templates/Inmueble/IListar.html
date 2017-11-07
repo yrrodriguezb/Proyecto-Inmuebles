@@ -1,0 +1,68 @@
+{% include "../master-page/master.html" %}
+
+{% load staticfiles %}
+
+{% block title %}
+  <title>Inmuebles</title>
+{% endblock title %}
+
+{% block extrastaticfiles %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+{% endblock extrastaticfiles %}
+
+{% block content %}
+  <div class="container">
+    <h2>Inmuebles</h2>
+
+    <form class="form-inline pull-right" style="margin: 13px 0" role="form">
+      <label for="txtInmuebles">Encontrar Inmueble:</label>
+      <div class="form-group">
+        <input type="text" class="form-control" id="txtInmuebles" placeholder="Buscar inmueble">
+      </div>
+      <button type="submit" id="btnBuscar" class="btn btn-default">Buscar</button>
+    </form>
+
+    {% if  object_list %}
+    <table class="table">
+      <thead class="thead-inverse">
+        <tr>
+          <th>#</th>
+          <th>Descripción</th>
+          <th>Dirección</th>
+          <th>Metros</th>
+          <th>Tipo</th>
+        </tr>
+      </thead>
+      <tbody id="tbody-data">
+        {% for inmueble in object_list %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{ inmueble.IDescripcion }}</td>
+          <td>{{ inmueble.IDireccion }}</td>
+          <td>{{ inmueble.IMetros }} m²</td>
+          <td>{{ inmuebles.ITipo.ITDescripcion }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-info">
+      <strong>Información!</strong> Aún no hay Inmuebles registrados.
+    </div>
+    {% endif %}
+
+
+    {% if page_obj.has_previous %}
+    <a class="btn btn-primary btn-sm" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+    {% endif %}
+
+    {% if page_obj.has_next %}
+    <a class="btn btn-primary btn-sm" href="?page={{ page_obj.next_page_number }}">siguiente</a>
+    {% endif %}
+
+    {% if page_obj.number and  page_obj.paginator.num_pages %}
+    <h6>Pagina {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</h6>
+    {% endif %}
+
+  </div>
+{% endblock content %}

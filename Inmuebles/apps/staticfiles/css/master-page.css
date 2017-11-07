@@ -1,0 +1,119 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  background: #FFFFFA;
+}
+
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  background: #2b3647;
+  z-index: 1000;
+}
+
+header span#btn-menu {
+  font-size: 20px;
+  color: #47BAC1;
+  cursor: pointer;
+}
+
+.navegacion {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 0%;
+  height: 100vh;
+  background: rgba(0, 0, 0, .0);
+  transition: background .3s;
+}
+
+.navegacion ul {
+  position: absolute;
+  top: 0;
+  left: -320px;
+  width: 320px;
+  height: 100%;
+  background: #354052;
+  list-style: none;
+}
+
+.navegacion .menu li.title-menu {
+  padding: 20px;
+  background: #354052;
+  color: #FFF;
+  text-align: center;
+  font-size: 13px;
+}
+
+.navegacion .menu a  {
+  display: block;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 200;
+  text-decoration: none;
+  color: #c0cad8;
+  border-bottom: 1px solid #c0cad8;
+}
+
+.navegacion .menu a:hover {
+  color: #FFF;
+  border-bottom: 1px solid #FFF;
+  transition: all ease 0.7s;
+}
+
+.navegacion .menu li span.icon-menu {
+  margin-right: 12px;
+}
+
+/*============ submenu ============= */
+.navegacion .submenu li.title-menu {
+  background: #354052;
+  color: #FFF;
+}
+
+.navegacion .submenu li.go-back {
+  padding: 10px 20px;
+  background: #354052;
+  color: #FFF;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.navegacion .submenu li.go-back::before,
+.navegacion .menu .item-submenu > a::after {
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  float: right;
+  color: #47bac1;
+  font-weight: bold;
+}
+
+.navegacion .submenu li.go-back::before {
+  content: '\f0d9';
+}
+
+.navegacion .menu .item-submenu > a::after {
+  content: '\f105';
+}
+
+
+.container {
+  display: block;
+  margin-top: 60px;
+  padding: 10px 20px;
+}
+
+table tbody#tbody-data tr:hover {
+  background: #fffcc0;
+}
