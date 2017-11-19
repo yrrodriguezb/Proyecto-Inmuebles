@@ -5,20 +5,41 @@
   <head>
     {% block title %}{% endblock title %}
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1-0, minimum-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/master-page.css' %}">
     <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
-    <script type="text/javascript" src="{% static 'js/jquery-3.2.1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery-2.2.3.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/master-page.js' %}"></script>
     {% block extrastaticfiles %}{% endblock extrastaticfiles %}
   </head>
   <body>
     <header>
       <span id="btn-menu" class="fa fa-bars"></span>
+
+      {% if request.user.is_active and request.user.is_authenticated %}
+        <div id="dvUsuario" class="items dropdown">
+          <a style="color:#FFF; text-decoration:none" class="dropdown-toggle" type="button" data-toggle="dropdown">{{request.user.first_name}} {{request.user.last_name}}<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a><i class="fa fa-user-md"></i><strong>{{ request.user.get_username }}</strong></a></li>
+            <li class="divider"></li>
+            <li><a href="{% url 'Usuarios:usuario-actualizar' %}"><i class="fa fa-database"></i>Actualizar datos</a></li>
+            {% if request.user.is_staff %}
+            <li class="divider"></li>
+            <li><a href="{% url 'admin:index' %}"><i class="fa fa-cog"></i>Administrador</a></li>
+            {% endif %}
+            <li class="divider"></li>
+            <li><a href="{% url 'Usuarios:usuario-logout' %}"><i class="fa fa-life-ring"></i>Cerrar sesión</a></li>
+          </ul>
+        </div>
+      {% else %}
+        <a href="{% url 'Usuarios:usuario-login' %}" id="btnIniciarSesion">Iniciar Sesión</a>
+      {% endif %}
+
       <nav class="navegacion">
         <ul class="menu">
           <li class="title-menu">Todas las categorias</li>
-          <li><a href="#"><span class="fa fa-home icon-menu"></span>Inicio</a></li>
+          <li><a href="{% url 'Index' %}"><span class="fa fa-home icon-menu"></span>Inicio</a></li>
           <li class="item-submenu" menu="1">
             <a href="#"><span class="fa fa-suitcase icon-menu"></span>Servicios</a>
             <ul class="submenu">
@@ -26,7 +47,7 @@
               <li class="go-back">Atras</li>
               <li><a href="#">Anuncio de arrendamiento</a></li>
               <li><a href="#">Anuncio de ventas</a></li>
-              <li><a href="#">Proyectos de vivienda</a></li>
+              <li><a href="{% url 'Inmuebles:inmuebles-listar' %}">Proyectos de vivienda</a></li>
             </ul>
           </li>
           <li class="item-submenu" menu="2">
@@ -35,8 +56,7 @@
               <li class="title-menu"><span class="fa fa-shopping-bag icon-menu"></span>Gestión Empresarial</li>
               <li class="go-back">Atras</li>
 
-              <li><a href="#">Inmobiliarias</a></li>
-              <li><a href="#">Constructoras</a></li>
+              <li><a href="{% url 'Empresas:empresa-listar' %}">Empresas</a></li>
             </ul>
           </li>
           <li><a href="#"><span class="fa fa-envelope icon-menu"></span>Contacto</a></li>
@@ -45,13 +65,13 @@
       </nav>
     </header>
 
+    {% block modaluser %}
+
+    {% endblock modaluser %}
 
     {% block content %}
 
     {% endblock content %}
 
-    <footer>
-
-    </footer>
   </body>
 </html>

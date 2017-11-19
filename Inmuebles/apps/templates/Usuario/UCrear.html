@@ -1,0 +1,87 @@
+{% extends "../master-page/master.html" %}
+
+{% block content %}
+  <div class="container">
+    <h1>Registro de usuario</h1>
+    <hr>
+    <div style="margin:auto; width:60%">
+      <div class="row">
+        <div class="center-block">
+          <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+              <label for="nombres">Nombres:</label>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" id="nombres" name="first_name" placeholder="Nombres" required >
+              </div>
+              {% if form.first_name.errors %}
+              <strong class="text-danger">{{ form.first_name.errors }}</strong>
+              {% endif %}
+            </div>
+
+            <div class="form-group">
+              <label for="apellidos">Apellidos:</label>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" id="apellidos" name="last_name" placeholder="Apellidos" required >
+              </div>
+              {% if form.last_name.errors %}
+              <strong class="text-danger">{{ form.last_name.errors }}</strong>
+              {% endif %}
+            </div>
+
+            <div class="form-group">
+              <label for="usuario">Nombre de Usuario:</label>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" id="usuario" name="username" placeholder="Nombre de Usuario" required >
+              </div>
+              {% if form.username.errors %}
+              <strong class="text-danger">{{ form.username.errors }}</strong>
+              {% endif %}
+            </div>
+
+            <div class="form-group">
+              <label for="email">Correo electronico:</label>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Correo electronico" required >
+              </div>
+              {% if form.email.errors %}
+              <strong class="text-danger">{{ form.email.errors }}</strong>
+              {% endif %}
+            </div>
+
+            <div class="form-group">
+              <label for="password1">Contraseña:</label>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></span>
+                <input type="password" class="form-control" id="password1" name="password1" placeholder="Contraseña" required>
+              </div>
+              {% if form.password1.errors %}
+              <strong class="text-danger">{{ form.password1.errors }}</strong>
+              {% endif %}
+            </div>
+
+            <div class="form-group">
+              <label for="password2">Confirmar Contraseña:</label>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-eye" aria-hidden="true"></i></span>
+                <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirmar contraseña" required>
+              </div>
+              {% if form.password2.errors %}
+              <strong class="text-danger">{{ form.password2.errors }}</strong>
+              {% endif %}
+            </div>
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-default">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

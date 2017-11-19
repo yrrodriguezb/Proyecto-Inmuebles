@@ -19,10 +19,42 @@ header {
   z-index: 1000;
 }
 
-header span#btn-menu {
-  font-size: 20px;
+header span#btn-menu, header #btnIniciarSesion, header .items {
   color: #47BAC1;
   cursor: pointer;
+  margin-right: 15px;
+}
+
+header span#btn-menu:hover, header #btnIniciarSesion:hover, #dvUsuario:hover {
+  color: #FFF;
+}
+
+header span#btn-menu {
+  font-size: 20px;
+}
+
+#dvUsuario .dropdown {
+  display: inline-block !important;
+}
+
+header #btnIniciarSesion, header #dvUsuario {
+  float: right;
+  background: #2b3647;
+  outline: 0;
+  font-family: 13px !important;
+  text-decoration: none;
+}
+
+#dvUsuario  ul.dropdown-menu {
+  right: 0 !important;
+  left: initial !important;
+  margin-top: 10px !important;
+}
+
+#dvUsuario ul.dropdown-menu i.fa {
+  color:#000;
+  font-size: 16px;
+  margin-right: 5px;
 }
 
 .navegacion {

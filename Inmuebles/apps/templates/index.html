@@ -1,12 +1,40 @@
-{% include "master-page/master.html" %}
-
+{% extends "master-page/master.html" %}
 
 {% block title %}
   <title>Inicio</title>
 {% endblock title %}
 
+{% block extrastaticfiles %}
+<style>
+   #map {
+    height: 400px;
+    width: 100%;
+   }
+</style>
+{% endblock extrastaticfiles %}
+
 {% block content %}
 <div class="container">
-  <h2>Index</h2>
+  <h2>Busca tu lugar favorito para encontrar un inmueble</h2>
+  <hr>
+
+  <div id="map"></div>
 </div>
+
+<script type="text/javascript">
+function initMap() {
+  var uluru = {lat: 4.71099, lng: -74.07209};
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 8,
+    center: uluru
+  });
+  var marker = new google.maps.Marker({
+    position: uluru,
+    map: map
+  });
+}
+</script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{GOOGLE_MAPS_API_KEY}}&callback=initMap"
+type="text/javascript"></script>
 {% endblock content %}

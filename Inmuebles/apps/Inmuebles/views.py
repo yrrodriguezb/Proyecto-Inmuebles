@@ -4,19 +4,18 @@ from __future__ import unicode_literals
 from django.http import HttpResponse
 from django.template import loader
 from django.db.models import Q
-from django.shortcuts import render_to_response
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic import ListView, CreateView
 
 from .models import InmuebleTipo, Inmueble
-from .forms import InmuebleTipoForm
+from ..conf import GOOGLE_MAPS_API_KEY
 
 
 def index(request):
     template = loader.get_template('index.html')
     context = {
-        'title': 'Inmuebles',
+        'GOOGLE_MAPS_API_KEY': GOOGLE_MAPS_API_KEY
     }
     return HttpResponse(template.render(context, request))
 
@@ -24,7 +23,7 @@ def index(request):
 class InmueblesListView(ListView):
     model = Inmueble
     template_name = 'Inmueble/IListar.html'
-    paginate_by = 25
+    paginate_by = 7
 
     def get_queryset(self):
         query = self.request.GET.get('q', '')
@@ -38,6 +37,11 @@ class InmueblesListView(ListView):
         else:
             results = Inmueble.objects.all()
         return results
+
+    def get_context_data(self, **kwargs):
+        context = super(InmueblesListView, self).get_context_data(**kwargs)
+        context['params'] = { 'query' : self.request.GET.get('q', '') }
+        return context
 
 
 class InmuebleTipoListView(ListView):
@@ -55,4 +59,4 @@ class InmuebleTipoCreateView(CreateView):
     model = InmuebleTipo
     fields = ['ITDescripcion', 'ITDescripcion_Corta']
     template_name = 'InmuebleTipo/ITAgregar.html'
-    success_url = reverse_lazy('Inmuebles:listarInmuebleTipo')
+    success_url = reverse_lazy('Inmuebles:inmuebles-listar')

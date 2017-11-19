@@ -6,19 +6,16 @@
   <title>Inmuebles</title>
 {% endblock title %}
 
-{% block extrastaticfiles %}
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-{% endblock extrastaticfiles %}
-
 {% block content %}
   <div class="container">
-    <h2>Inmuebles</h2>
+    <h1>Proyectos de vivienda</h1>
+    <hr>
 
-    <div class="row">
+    <div class="form-group row">
       <form mathod="GET" class="form-inline pull-right" style="margin: 13px 0" role="form">
-        <label for="txtInmuebles">Encontrar Inmueble:</label>
         <div class="form-group">
-          <input type="text" class="form-control" name="q" id="txtInmuebles" placeholder="Buscar inmueble">
+          <label for="txtInmuebles">Encontrar Inmueble:</label>
+          <input type="text" class="form-control" name="q" id="txtInmuebles" value="{{ params.query }}" placeholder="Buscar inmueble">
         </div>
         <button type="submit" id="btnBuscar" class="btn btn-default">Buscar</button>
       </form>
@@ -26,7 +23,7 @@
 
     {% if  object_list %}
     <div class="row">
-      <table class="table">
+      <table class="table table-striped">
         <thead class="thead-inverse">
           <tr>
             <th>#</th>
@@ -52,13 +49,13 @@
     {% else %}
     <div class="row">
       <div class="alert alert-info">
-        <strong>Información!</strong> Aún no hay Inmuebles registrados.
+        <strong>Información!</strong> No se encontraron inmuebles.
       </div>
     </div>
     {% endif %}
 
     {% if page_obj.has_previous or page_obj.has_next  %}
-    <div class="row">
+    <div class="row pager">
       {% if page_obj.number and  page_obj.paginator.num_pages %}
       <h6>Pagina {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</h6>
       {% endif %}

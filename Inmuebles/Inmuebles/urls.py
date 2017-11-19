@@ -22,7 +22,9 @@ from apps.Inmuebles.views import index
 urlpatterns = [
     url(r'^jet/', include('jet.urls', 'jet')),
     url(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
-    url(r'^$', index),
+    url(r'^$', index, name='Index'),
     url(r'^admin/', admin.site.urls),
     url(r'^inmuebles/', include('apps.Inmuebles.urls', namespace='Inmuebles')),
+    url(r'^usuario/', include('apps.Usuarios.urls', namespace='Usuarios')),
+    url(r'^empresa/', include('apps.Empresas.urls', namespace='Empresas')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

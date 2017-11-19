@@ -2,7 +2,6 @@ from django.conf.urls import url
 
 from .views import (
     index,
-    search,
     InmueblesListView,
     InmuebleTipoListView,
     InmuebleTipoCreateView

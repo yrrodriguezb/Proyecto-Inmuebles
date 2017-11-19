@@ -1,0 +1,63 @@
+{% include "../master-page/master.html" %}
+
+{% load staticfiles %}
+
+{% block title %}
+  <title>Empresas</title>
+{% endblock title %}
+
+{% block content %}
+  <div class="container">
+    <h2>Empresas</h2>
+    <hr>
+
+    <div class="row">
+      <form mathod="GET" class="form-inline pull-right" style="margin: 13px 0" role="form">
+        <label for="txtEmpresa">Buscar Empresa:</label>
+        <div class="form-group">
+          <input type="text" class="form-control" name="q" id="txtEmpresa" value="{{ params.query }}" placeholder="Buscar empresa">
+        </div>
+        <button type="submit" id="btnBuscar" class="btn btn-default">Buscar</button>
+      </form>
+    </div>
+
+    {% if  object_list %}
+    <div class="row">
+      <table class="table table-striped">
+        <thead class="thead-inverse">
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Telefono</th>
+            <th>Email</th>
+            <th>Pagina Web</th>
+          </tr>
+        </thead>
+        <tbody id="tbody-data">
+          {% for empresa in object_list %}
+          <tr>
+            <th scope="row">{{ empresa.id }}</th>
+            <td>{{ empresa.EmpNombre }}</td>
+            <td>{{ empresa.EmpDireccion }}</td>
+            <td>{{ empresa.EmpTelefono }}</td>
+            <td>
+              {% if empresa.EmpEmail is not None %}
+              {{ empresa.EmpEmail }}
+              {% endif %}
+            </td>
+            <td><a href="{{ empresa.EmpPaginaWeb }}" target="_blank">{{ empresa.EmpPaginaWeb }}</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="row">
+      <div class="alert alert-info">
+        <strong>Información!</strong> No se encontraron empresas.
+      </div>
+    </div>
+    {% endif %}
+  </div>
+{% endblock content %}
