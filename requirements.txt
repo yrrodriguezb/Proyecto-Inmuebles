@@ -1,6 +1,6 @@
 certifi==2017.11.5
 chardet==3.0.4
-Django==1.11.28
+Django==1.11.29
 django-feedparser==0.2.1
 django-jet==1.0.6
 feedparser==5.2.1
